@@ -34,7 +34,7 @@ function App() {
     <>
       <div
         className={`flex justify-center items-center flex-col ${
-          meal ? 'my-8' : ''
+          meal ? 'my-8' : 'h-screen'
         } space-y-3`}
       >
         <h1 className='text-3xl md:text-4xl'>Feeling Hungry?</h1>
