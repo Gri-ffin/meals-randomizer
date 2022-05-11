@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useState } from 'react';
-import MealInfo from './Components/Info';
-import MealIngredients from './Components/Ingredients';
+import MealWrapper from './Components/MealWrapper';
+import MealDetails from './Components/Meal/Details';
+import MealRecipe from './Components/Meal/MealRecipe';
+import MealVideo from './Components/Meal/MealVideo';
 
 function App() {
   const [meal, setMeal] = useState(null);
@@ -50,38 +52,11 @@ function App() {
       </div>
       {meal && (
         <>
-          <div className='flex justify-center items-center flex-col md:flex-row'>
-            <div className='space-y-2'>
-              <img
-                className='w-96 h-96 md:mt-10'
-                src={meal.strMealThumb}
-                alt='Meal Image'
-              />
-              <MealInfo info={meal.strCategory} text='Category' />
-              <MealInfo info={meal.strArea} text='Area' />
-              <MealInfo info={meal.strTags} text='Tags' />
-              <MealIngredients ingredients={ingredients} />
-            </div>
-            <div className='mx-9 md:w-[40%] self-start'>
-              <h4 className='text-3xl py-7'>{meal.strMeal}</h4>
-              <p className='text-sm leading-7 md:leading-6 md:text-base'>
-                {meal.strInstructions}
-              </p>
-            </div>
-          </div>
-          <div className='m-auto w-[70%] h-[70%] text-center mb-10 space-y-2'>
-            <h4 className='text-2xl self-start'>Video Recipe</h4>
-            <div className='relative pb-[56.25%] pt-6 h-0'>
-              <iframe
-                src={`https://www.youtube.com/embed/${meal.strYoutube.slice(
-                  -11
-                )}`}
-                width='420'
-                height='315'
-                className='absolute top-0 left-0 w-full h-full'
-              ></iframe>
-            </div>
-          </div>
+          <MealWrapper>
+            <MealDetails meal={meal} ingredients={ingredients} />
+            <MealRecipe meal={meal} />
+          </MealWrapper>
+          <MealVideo meal={meal} />
         </>
       )}
     </>
